@@ -4,6 +4,7 @@ var toDoArray = []
 var aside = document.querySelector('.aside');
 var asideIdeas = document.querySelector('.form__div-idea-input');
 
+
 // EVENT LISTENERS
 aside.addEventListener('click', function () {
   event.preventDefault();
@@ -25,13 +26,14 @@ function addInitialItems() {
       <p class="form__container-p" >${asideIdeaInput.value}</p>
     </container>`
   );
-  
+  var taskInput = document.querySelector('.form__section-input')
+  clearInput(taskInput)
 }
-// RENAME FUNCTION TO GET ITEMS, OR ENVOKE THIS FUNCTION IN THAT
+
 function makeTaskList(event) {
-  getItemsFromAside(event)
+  var itemsFromAside = getItemsFromAside(event)
   
-  console.log(tempArray)
+  console.log(itemsFromAside)
 }
 
 function getItemsFromAside(event) {
@@ -41,4 +43,8 @@ function getItemsFromAside(event) {
     tempArray.push(items[i].innerText)
   }
   return tempArray
+}
+
+function clearInput(input) {
+  input.value = '';
 }
