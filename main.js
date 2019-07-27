@@ -13,12 +13,12 @@ aside.addEventListener('click', function () {
     addInitialItems();
   }
   if (event.target.closest('.make')) {
-    makeTaskList(event);
+    createTaskCard(event);
   }
 })
 
 
-function addTitleToCard(title, taskItems) {
+function appendToDoCard(title, taskItems) {
   console.log('title: ', title)
   main.insertAdjacentHTML(
     'afterbegin',
@@ -55,21 +55,20 @@ function addInitialItems() {
   clearInput(taskInput)
 }
 
-function makeTaskList(event) {
-  var itemsFromAside = getItemsFromAside(event);
+function createTaskCard(event) {
   var asideTitleInput = document.querySelector('.form__input');
-  var asideIdeaList = document.querySelector('.form__div-idea-input')
-  var asideItemsInHtml = makeAsideItemHtml(itemsFromAside)
-  addTitleToCard(asideTitleInput, asideItemsInHtml);
-  asideIdeaList.innerHTML = '';
+  var asideItemsInHtml = makeAsideItemHtml(event)
+  appendToDoCard(asideTitleInput, asideItemsInHtml);
+  document.querySelector('.form__div-idea-input').innerHTML = ''
 }
 
-function makeAsideItemHtml(arrayOfItems) {
+function makeAsideItemHtml(event) {
+  var itemsFromAside = getItemsFromAside(event);
   var createdHtmlArray = []
-  for (var i = 0; i < arrayOfItems.length; i++) {
+  for (var i = 0; i < itemsFromAside.length; i++) {
     createdHtmlArray.push(`<div class="todo-card-item__div">
         <img class="todo-card-item__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
-          <p class="todo-card-item__div__p">${arrayOfItems[i]}</p>
+          <p class="todo-card-item__div__p">${itemsFromAside[i]}</p>
           </div>`)
   }
   return createdHtmlArray.join(' ')
@@ -83,8 +82,6 @@ function getItemsFromAside(event) {
   }
   return tempArray
 }
-
-
 
 function clearInput(input) {
   input.value = '';
