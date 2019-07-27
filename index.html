@@ -3,29 +3,32 @@
     <head>
       <link rel="stylesheet" href="normalize.css" />
       <link rel="stylesheet" href="styles.css" />
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charset="UTF-8">
     </head>
     <body>
-      <header class="header">
-        <h1 class="header__h1">CHECK YO' SELF</h1>
+      <header class="header"> 
+        <h1 class="header__h1">CHECK <span class="header__h1-span">YO'</span> SELF</h1>
         <section class="header__section">
           <img class="header__section-img image" type="image" src="images/search.svg">
           <input class="header__section-text" type="text" />
         </section>
       </header>
-      <aside>
+      <aside class="aside">
         <form class="form" >
           <h2 class="form__h2" >Task Title</h2>
           <input class="form__input" type="text" />
-          <container class="form__container container1" >
-            <img class="form__container-img" src="images/delete.svg" alt="delete task item button">
+          <container class="form__container container1">
+            <input type="image" class="form__container-img image" src="images/delete.svg" alt="delete task item button">
+            <!-- <img class="form__container-img image" src="images/delete.svg" alt="delete task item button"> -->
             <p class="form__container-p" >This is the first thing.</p>
           </container>
           <h2 class="form__h2">Task Item</h2>
             <section class="form__section section2">
               <input class="form__section-input" type="text">
-              <img class="form__section-img" src="images/plus.svg" alt="add task item button">
+              <input type="image" class="form__section-img image" src="images/plus.svg" alt="add task item button">
+              <!-- <img class="form__section-img image" src="images/plus.svg" alt="add task item button"> -->
             </section>
           <button class="form__button" >Make Task List</button>
           <button class="form__button" >Clear All</button>
@@ -37,16 +40,16 @@
         <article class="article">
           <h3 class="article__h3" >Task Title</h3>
           <div class="article__div">
-            <img class="article__div__img img" src="images/checkbox.svg" alt="unchecked todo checkbox">
+            <img class="article__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
             <p class="article__div__p">First Thing To Do!</p>
           </div>
           <container class="article__container">
             <div class="article__container__div1">
-              <img class="article__container__div1__img" src="images/urgent.svg" alt="unactive urgent status">
+              <img class="article__container__div1__img image" src="images/urgent.svg" alt="unactive urgent status">
               <p class="article__container__div1__p">URGENT</p>
             </div>
             <div class="article__container__div2">
-              <img class="article__container__div2__img" src="images/delete.svg" alt="unactive delete button">
+              <img class="article__container__div2__img image" src="images/delete.svg" alt="unactive delete button">
               <p class="article__container__div2__delete" >DELETE</p>
             </div>
           </container>
