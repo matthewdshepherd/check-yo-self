@@ -145,7 +145,7 @@ body {
   min-height: 100vh;
 }
 
-.article {
+.todo-card {
   background-color: #fafdfa;
   border: 2px solid #c7d3d8;
   font-weight: 400;
@@ -155,47 +155,47 @@ body {
   min-width: 200px;
 }
 
-.article:hover {
+.todo-card:hover {
   box-shadow: 0 4px 8px 0 #587a75, 0 6px 20px 1px #587a75;
   /* transform: scale(1.2) */
 }
 
-.article__h3 {
+.todo-card__h3 {
   font-weight: 800;
   margin: 3% 0 3% 3%;
 }
 
-.article__div {
+.todo-card-item__div {
   align-items: center;
   display: flex;
   margin: 3% 0 3% 3%;
 }
 
-.article__div__p {
+.todo-card-item__div__p {
   margin: 0 0 0 3%;
 }
 
-.article__div-sperator1,
- .article__div-sperator2{
+.todo-card__div-sperator1,
+ .todo-card__div-sperator2{
   height: 2px;
   width: 100%;
   background-color: #c7d3d8;
 }
 
-.article__div-sperator1 {
+.todo-card__div-sperator1 {
   margin-bottom: 20px; 
 }
 
-.article__div-sperator2 {
+.todo-card__div-sperator2 {
   margin-top: 20px; 
 }
 
-.article__container {
+.todo-card-footer__container {
   display: flex;
   justify-content: space-between;
 }
 
-.article__container__div {
+.todo-card-footer__container__div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -208,11 +208,6 @@ body {
 .urgent,
 .delete {
   margin-top: 3px;
-}
-
-.urgent-image, 
-.delete-image {
-  transform: scale(1.2)
 }
 
 input {
