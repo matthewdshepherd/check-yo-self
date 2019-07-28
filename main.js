@@ -5,6 +5,11 @@ var toDoArray = JSON.parse(localStorage.getItem('toDoObj')) || []
 var aside = document.querySelector('.aside');
 var asideIdeas = document.querySelector('.form__div-idea-input');
 var asideTitleInput = document.querySelector('.form__input');
+var asideTasks = document.querySelector('.form__div-idea-input')
+var addTask = document.querySelector(".form__section-img")
+var make = document.querySelector(".make")
+var clear = document.querySelector(".clear")
+var filter = document.querySelector(".filter")
 var taskInput = document.querySelector('.form__section-input')
 var main = document.querySelector('.main')
 
@@ -13,20 +18,34 @@ reassignClass();
 persist();
 
 // EVENT LISTENERS
+aside.addEventListener('keyup', enableasideButtons);
 aside.addEventListener('click', function () {
   event.preventDefault();
   if (event.target.closest('.form__section-img')) {
     addInitialItems(taskInput);
     clearInput(taskInput)
-  }
+    disableButtons(addTask)
+  };
+
   if (event.target.closest('.make')) {
     newToDo(event);
-  }
+    disableButtons(make)
+    disableButtons(clear)
+    disableButtons(addTask)
+  };
+
   if (event.target.closest('.clear')) {
     clearInput(taskInput)
     clearInput(asideTitleInput)
-    document.querySelector('.form__div-idea-input').innerHTML = ''
-  }
+    asideTasks.innerHTML = ''
+    disableButtons(clear)
+    disableButtons(make)
+    disableButtons(addTask)
+  };
+
+  if (event.target.closest('.form__container-img')) {
+    event.target.closest('.container1').remove()
+  };
 })
 
 function newToDo(event) {
@@ -139,3 +158,23 @@ function makeTaskString(toDoObj) {
   }
   return createdHtmlArray.join(' ')
 }
+
+function enableasideButtons() {
+  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
+    clear.disabled = false;
+  }
+  if (asideTitleInput.value !== '' && asideTasks.innerHTML !== '') {
+    make.disabled = false;
+  }
+  if (taskInput.value !== '') {
+    addTask.disabled = false;
+  }
+}
+
+function disableButtons (button) {
+  button.disabled = true;
+}
+
+// function deleteTaskItem(event) {
+//   event.target.classList.remove('form__container-img')
+// }
