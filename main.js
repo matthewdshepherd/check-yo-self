@@ -18,7 +18,14 @@ reassignClass();
 persist();
 
 // EVENT LISTENERS
-aside.addEventListener('keyup', enableasideButtons);
+aside.addEventListener('keypress', function () {
+  if (event.keyCode === 13) {
+      event.preventDefault();
+      addTask.click();
+    }
+    enableasideButtons()
+  });
+
 aside.addEventListener('click', function () {
   event.preventDefault();
   if (event.target.closest('.form__section-img')) {
@@ -47,6 +54,8 @@ aside.addEventListener('click', function () {
     event.target.closest('.container1').remove()
   };
 })
+
+main.addEventListener('click', )
 
 function newToDo(event) {
   var toDoObj = new ToDoList(Date.now(), asideTitleInput.value);
@@ -107,7 +116,7 @@ function makeAsideItemHtml(event) {
   var createdHtmlArray = []
   for (var i = 0; i < itemsFromAside.length; i++) {
     createdHtmlArray.push(`<div class="todo-card-item__div">
-        <img class="todo-card-item__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
+        <input type="image" class="todo-card-item__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
           <p class="todo-card-item__div__p">${itemsFromAside[i]}</p>
           </div>`)
   }
@@ -152,7 +161,7 @@ function makeTaskString(toDoObj) {
   var createdHtmlArray = []
   for (var i = 0; i < toDoObjTasksArray.length; i++) {
     createdHtmlArray.push(`<div class="todo-card-item__div">
-        <img class="todo-card-item__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
+        <input type="image" class="todo-card-item__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
           <p class="todo-card-item__div__p">${toDoObjTasksArray[i].item}</p>
           </div>`)
   }
