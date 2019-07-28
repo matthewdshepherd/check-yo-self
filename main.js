@@ -1,18 +1,23 @@
 // Global Array
-var toDoArray = []
+var toDoArray = JSON.parse(localStorage.getItem('toDoObj')) || []
 
 // QUERY SELECTORS
 var aside = document.querySelector('.aside');
 var asideIdeas = document.querySelector('.form__div-idea-input');
 var asideTitleInput = document.querySelector('.form__input');
+var taskInput = document.querySelector('.form__section-input')
 var main = document.querySelector('.main')
 
+// Functions on page load
+reassignClass();
+persist();
 
 // EVENT LISTENERS
 aside.addEventListener('click', function () {
   event.preventDefault();
   if (event.target.closest('.form__section-img')) {
-    addInitialItems();
+    addInitialItems(taskInput);
+    clearInput(taskInput)
   }
   if (event.target.closest('.make')) {
     newToDo(event);
@@ -22,24 +27,55 @@ aside.addEventListener('click', function () {
 function newToDo(event) {
   var toDoObj = new ToDoList(Date.now(), asideTitleInput.value);
   toDoArray.push(toDoObj);
-  // toDo.saveToStorage(toDoArray);
+  pushItemsIntoToDoObj(getItemsFromAside(event), toDoObj);
   createTaskCard(event, toDoObj)
-  console.log('function newToDo', toDoObj)
+  toDoObj.saveToStorage(toDoArray);
+}
+
+function remakeNewIdea(id, title, urgent, tasks) {
+  var tempTasks = tasks
+  var toDoObj = new ToDoList(id, title, urgent, tasks);
+  toDoObj.tasks = tempTasks;
+  return toDoObj
+}
+
+function reassignClass() {
+  var tempArray = []
+  toDoArray.forEach(function (toDoObj) {
+    tempArray.push(remakeNewIdea(toDoObj.id, toDoObj.title, toDoObj.urgent, toDoObj.tasks));
+  });
+  toDoArray = tempArray;
 }
 
 function createTaskCard(event, toDoObj) {
-  var asideItemsInHtml = makeAsideItemHtml(event)
-  appendToDoCard(toDoObj, asideItemsInHtml);
-  pushItemsIntoToDoObj(getItemsFromAside(event), toDoObj);
+  appendToDoCard(toDoObj, makeAsideItemHtml(event));
   clearInput(asideTitleInput, toDoObj);
   document.querySelector('.form__div-idea-input').innerHTML = ''
-  console.log('function createTaskCard', toDoObj)
 }
 
 function pushItemsIntoToDoObj(arraOfItems, toDoObj) {
   for (var i = 0; i < arraOfItems.length; i++) {
-    toDoObj.tasks.push(`{ check: false, item: ${arraOfItems[i]}}`)
+    toDoObj.tasks.push({ check: false, item: arraOfItems[i]})
   }
+}
+
+function getItemsFromAside(event) {
+  var items = event.target.previousElementSibling.previousElementSibling.previousElementSibling.children
+  var tempArray = []
+  for (var i = 0; i < items.length; i++) {
+    tempArray.push(items[i].innerText)
+  }
+  return tempArray
+}
+
+function addInitialItems() {
+  asideIdeas.insertAdjacentHTML(
+    'beforeend',
+    `<container class="form__container container1">
+    <input type="image" class="form__container-img image" src="images/delete.svg" alt="delete task item button">
+    <p class="form__container-p" >${taskInput.value}</p>
+    </container>`
+    );
 }
 
 function makeAsideItemHtml(event) {
@@ -52,15 +88,6 @@ function makeAsideItemHtml(event) {
           </div>`)
   }
   return createdHtmlArray.join(' ')
-}
-
-function getItemsFromAside(event) {
-  var items = event.target.previousElementSibling.previousElementSibling.previousElementSibling.children
-  var tempArray = []
-  for (var i = 0; i < items.length; i++) {
-    tempArray.push(items[i].innerText)
-  }
-  return tempArray
 }
 
 function appendToDoCard(toDoObj, taskItems) {
@@ -83,22 +110,27 @@ function appendToDoCard(toDoObj, taskItems) {
       </container>
     </article>`
   )
-
-}
-
-function addInitialItems() {
-  var asideIdeaInput = document.querySelector('.form__section-input')
-  asideIdeas.insertAdjacentHTML(
-    'beforeend',
-    `<container class="form__container container1">
-    <input type="image" class="form__container-img image" src="images/delete.svg" alt="delete task item button">
-    <p class="form__container-p" >${asideIdeaInput.value}</p>
-    </container>`
-    );
-  var taskInput = document.querySelector('.form__section-input')
-  clearInput(taskInput)
 }
 
 function clearInput(input) {
   input.value = '';
+}
+
+function persist() {
+  toDoArray.forEach(function (toDoObj) {
+    var reappendTasks = makeTaskString(toDoObj)
+    appendToDoCard(toDoObj, reappendTasks)
+  })
+}
+// need to update this function to change image when clicked(toDoObj.check === (false/true))
+function makeTaskString(toDoObj) {
+  var toDoObjTasksArray = toDoObj.tasks;
+  var createdHtmlArray = []
+  for (var i = 0; i < toDoObjTasksArray.length; i++) {
+    createdHtmlArray.push(`<div class="todo-card-item__div">
+        <img class="todo-card-item__div__img image" src="images/checkbox.svg" alt="unchecked todo checkbox">
+          <p class="todo-card-item__div__p">${toDoObjTasksArray[i].item}</p>
+          </div>`)
+  }
+  return createdHtmlArray.join(' ')
 }
