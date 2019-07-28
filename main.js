@@ -55,7 +55,13 @@ aside.addEventListener('click', function () {
   };
 })
 
-main.addEventListener('click', )
+// todo - card - item__div__img image
+
+main.addEventListener('click', function () {
+ if (event.target.closest('.delete-image')) {
+   
+ }
+})
 
 function newToDo(event) {
   var toDoObj = new ToDoList(Date.now(), asideTitleInput.value);
@@ -133,11 +139,11 @@ function appendToDoCard(toDoObj, taskItems) {
       <div class="todo-card__div-sperator2"></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
-          <img class="todo-card-footer__container__div1__img urgent-image image" src="images/urgent.svg" alt="unactive image urgent status">
+          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" src="images/urgent.svg" alt="unactive image urgent status">
             <p class="todo-card-footer__container__div urgent">URGENT</p>
         </div>
         <div class="todo-card-footer__container__div">
-          <img class="todo-card-footer__container__div2__img delete-image image" src="images/delete.svg" alt="unactive delete button">
+          <input type="image" class="todo-card-footer__container__div2__img delete-image image" src="images/delete.svg" alt="unactive delete button">
           <p class="todo-card-footer__container__div delete" >DELETE</p>
         </div>
       </container>
