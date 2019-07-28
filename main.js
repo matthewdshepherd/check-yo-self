@@ -22,6 +22,11 @@ aside.addEventListener('click', function () {
   if (event.target.closest('.make')) {
     newToDo(event);
   }
+  if (event.target.closest('.clear')) {
+    clearInput(taskInput)
+    clearInput(asideTitleInput)
+    document.querySelector('.form__div-idea-input').innerHTML = ''
+  }
 })
 
 function newToDo(event) {
@@ -49,7 +54,7 @@ function reassignClass() {
 
 function createTaskCard(event, toDoObj) {
   appendToDoCard(toDoObj, makeAsideItemHtml(event));
-  clearInput(asideTitleInput, toDoObj);
+  clearInput(asideTitleInput);
   document.querySelector('.form__div-idea-input').innerHTML = ''
 }
 
