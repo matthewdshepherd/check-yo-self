@@ -59,7 +59,7 @@ aside.addEventListener('click', function () {
 
 main.addEventListener('click', function () {
  if (event.target.closest('.delete-image')) {
-   
+   deleteCard(event)
  }
 })
 
@@ -190,6 +190,46 @@ function disableButtons (button) {
   button.disabled = true;
 }
 
-// function deleteTaskItem(event) {
-//   event.target.classList.remove('form__container-img')
-// }
+function deleteCard(event) {
+  enableDeleteVerification(event)
+  var cardIndex = findIndex(event);
+  if (event.target.closest('.delete-image')) {
+    event.target.closest('.todo-card').remove();
+    toDoArray[cardIndex].deleteFromStorage(cardIndex);
+  }
+}
+
+function findID(event) {
+  var container = event.target.closest('.todo-card');
+  if (toDoArray.length > 0 && container) {
+    return parseInt(event.target.closest('.todo-card').dataset.id);
+  }
+}
+
+function findIndex(event) {
+  var id = findID(event);
+  for (var i = 0; i < toDoArray.length; i++) {
+    if (id === toDoArray[i].id) {
+      return parseInt(i);
+    }
+  }
+}
+
+function enableDeleteVerification(event) {
+  var cardIndex = findIndex(event);
+  var taskArray = cardIndex.tasks
+  var trueCounter = 0
+  taskArray.forEach(function (item) {
+    if (item.check === true) {
+      trueCounter += 1
+    }
+  })
+  if (trueCounter === taskArray.length) {
+    clear.disabled = false;
+  }
+
+}
+
+array1.forEach(function (element) {
+  console.log(element);
+});
