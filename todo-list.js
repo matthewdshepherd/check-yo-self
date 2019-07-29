@@ -3,7 +3,7 @@ class ToDoList {
     this.id = id,
     this.title = title;
     this.urgent = urgent || false;
-    this.tasks = []
+    this.tasks = tasks || []
   }
 
   // methods
