@@ -3,7 +3,7 @@ class ToDoList {
     this.id = id,
     this.title = title;
     this.urgent = urgent || false;
-    this.tasks = []
+    this.tasks = tasks || []
   }
 
   // methods
@@ -12,8 +12,9 @@ class ToDoList {
       JSON.stringify(toDoArray));
   }
 
-  deleteFromStorage() {
-
+  deleteFromStorage(cardIndex) {
+    toDoArray.splice(cardIndex, 1);
+    this.saveToStorage(toDoArray);
   }
   // updateToDo(should update the todo’s title and urgency)
   updateToDo() {

@@ -66,7 +66,6 @@ body {
   justify-content: center;
   grid-area: aside;
   min-width: 275px;
-  max-width: 400px;
   height: 100vh;
 } 
 
@@ -211,6 +210,11 @@ body {
 .urgent,
 .delete {
   margin-top: 3px;
+  padding: 0;
+}
+
+button:disabled {
+  background-color: #8F8F9E
 }
 
 input {
