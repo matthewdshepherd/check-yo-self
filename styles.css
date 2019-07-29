@@ -143,9 +143,9 @@ body {
   background-color: #f3f6f7;
   grid-area: main;
   height: 100%;
-  padding: 10px;
+  padding: 1rem;;
   min-height: 100vh;
-  column-width: 13em; /* this is part of the settings for masanory */ 
+  column-width: 17em; /* this is part of the settings for masanory */ 
 
 }
 
@@ -154,13 +154,12 @@ body {
   border: 2px solid #c7d3d8;
   font-weight: 400;
   color: #1f1f3d;
-  margin: 15px 15px 20px 15px;
-  max-width: 300px;
-  min-width: 225px;
+  /* margin: 15px 15px 20px 15px; */
+  /* max-width: 325px; */
+  min-width: 275px;
   display: inline-block;
-  margin:  0.25rem;
-  padding:  1rem;
-  width:  100%; 
+  margin:  0.5rem  1rem  0.5rem 0;
+  width:  90%; 
 }
 
 .todo-card:hover {
