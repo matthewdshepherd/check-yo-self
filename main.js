@@ -31,26 +31,26 @@ aside.addEventListener('click', function () {
   event.preventDefault();
   if (event.target.closest('.form__section-img')) {
     addItemsToAside(taskInput);
-    clearInput(taskInput)
-    enableasideButtons()
-    disableButtons(addTask)
+    clearInput(taskInput);
+    enableasideButtons();
+    disableButtons(addTask);
   };
 
   if (event.target.closest('.make')) {
-    clearInput(taskInput)
+    clearInput(taskInput);
     newToDo(event);
-    disableButtons(make)
-    disableButtons(clear)
-    disableButtons(addTask)
+    disableButtons(make);
+    disableButtons(clear);
+    disableButtons(addTask);
   };
 
   if (event.target.closest('.clear')) {
-    clearInput(taskInput)
-    clearInput(asideTitleInput)
-    asideTasks.innerHTML = ''
-    disableButtons(clear)
-    disableButtons(make)
-    disableButtons(addTask)
+    clearInput(taskInput);
+    clearInput(asideTitleInput);
+    asideTasks.innerHTML = '';
+    disableButtons(clear);
+    disableButtons(make);
+    disableButtons(addTask);
   };
 
   if (event.target.closest('.form__container-img')) {
@@ -62,12 +62,15 @@ aside.addEventListener('click', function () {
 })
 
 main.addEventListener('click', function () {
- if (event.target.closest('.delete-image')) {
-   deleteCard(event)
- }
+  if (event.target.closest('.delete-image')) {
+   deleteCard(event);
+  }
   if (event.target.closest('.todo-card-item__div__img')) {
-    checkItem(event)
-    enableDeleteVerification(event)
+    checkItem(event);
+    enableDeleteVerification(event);
+  }
+  if (event.target.closest('.urgent-image')) {
+    makeUrgent(event);
   }
 })
 
@@ -150,6 +153,7 @@ function makeAsideItemHtml(event) {
 };
 
 function appendToDoCard(toDoObj, taskItems) {
+  console.log('toDoObj.urgent: ', toDoObj.urgent)
   main.insertAdjacentHTML(
     'afterbegin',
     `<article class="todo-card" data-id="${toDoObj.id}">
@@ -159,7 +163,7 @@ function appendToDoCard(toDoObj, taskItems) {
       <div class="todo-card__div-sperator2"></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
-          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" src="images/urgent.svg" alt="unactive image urgent status">
+          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `src="images/urgent-active.svg"` : `src = "images/urgent.svg"`} alt="unactive image urgent status">
             <p class="todo-card-footer__container__div urgent">URGENT</p>
         </div>
         <div class="todo-card-footer__container__div">
@@ -253,8 +257,14 @@ function checkItem(event) {
     event.target.src = 'images/checkbox.svg';
     toggleCheck(event)
   }
-
 };
+
+function makeUrgent(event) {
+  var cardIndex = findIndex(event);
+  toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`)) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`))
+
+  toDoArray[cardIndex].saveToStorage(toDoArray)
+}
 
 function findItemID(event) {
   if (event.target.closest('.todo-card-item__div')) {
@@ -290,6 +300,8 @@ function getArrayOfItemIDs(toDoObjTasks) {
    
 };
 
+
+
 function toggleCheck(event) {
   var itemIndex = findItemIndex(event)
   var cardIndex = findIndex(event);
@@ -324,7 +336,6 @@ function enableDeleteVerificationOnPageLoad(toDoObj) {
     }
   })
   if (trueCounter === taskArray.length) {
-    console.log('Lets hope this works!!', event)
     document.querySelector('.delete-image').disabled = false;
   }
 }
