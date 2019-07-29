@@ -71,7 +71,6 @@ main.addEventListener('click', function () {
   }
   if (event.target.closest('.urgent-image')) {
     makeUrgent(event);
-    console.log('this wants to become urgent!!')
   }
 })
 
@@ -154,6 +153,7 @@ function makeAsideItemHtml(event) {
 };
 
 function appendToDoCard(toDoObj, taskItems) {
+  console.log('toDoObj.urgent: ', toDoObj.urgent)
   main.insertAdjacentHTML(
     'afterbegin',
     `<article class="todo-card" data-id="${toDoObj.id}">
@@ -163,7 +163,7 @@ function appendToDoCard(toDoObj, taskItems) {
       <div class="todo-card__div-sperator2"></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
-          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" src="images/urgent.svg" alt="unactive image urgent status">
+          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `src="images/urgent-active.svg"` : `src = "images/urgent.svg"`} alt="unactive image urgent status">
             <p class="todo-card-footer__container__div urgent">URGENT</p>
         </div>
         <div class="todo-card-footer__container__div">
@@ -260,13 +260,10 @@ function checkItem(event) {
 };
 
 function makeUrgent(event) {
-  if (event.target.src.includes('images/urgent.svg')) {
-    event.target.src = 'images/urgent-active.svg';
-    toggleUrgent(event)
-  } else {
-    event.target.src = 'images/urgent.svg';
-    togglUrgent(event)
-  }
+  var cardIndex = findIndex(event);
+  toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`)) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`))
+
+  toDoArray[cardIndex].saveToStorage(toDoArray)
 }
 
 function findItemID(event) {
@@ -303,15 +300,7 @@ function getArrayOfItemIDs(toDoObjTasks) {
    
 };
 
-function toggleUrgent(event) {
-  var cardIndex = findIndex(event);
-  if (toDoArray[cardIndex].urgent === false) {
-    toDoArray[cardIndex].urgent = true
-  } else {
-    toDoArray[cardIndex].urgent = false
-  }
-  toDoArray[cardIndex].saveToStorage(toDoArray)
-}
+
 
 function toggleCheck(event) {
   var itemIndex = findItemIndex(event)
