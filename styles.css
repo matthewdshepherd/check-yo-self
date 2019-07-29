@@ -145,6 +145,8 @@ body {
   height: 100%;
   padding: 10px;
   min-height: 100vh;
+  column-width: 13em; /* this is part of the settings for masanory */ 
+
 }
 
 .todo-card {
@@ -154,7 +156,11 @@ body {
   color: #1f1f3d;
   margin: 15px 15px 20px 15px;
   max-width: 300px;
-  min-width: 200px;
+  min-width: 225px;
+  display: inline-block;
+  margin:  0.25rem;
+  padding:  1rem;
+  width:  100%; 
 }
 
 .todo-card:hover {
