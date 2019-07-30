@@ -194,13 +194,8 @@ function makeTaskString(toDoObj) {
   var checkedText = `style = "color: #3c6577; font-style: italic;"`
   var image;
   for (var i = 0; i < toDoObjTasksArray.length; i++) {
-    if (toDoObjTasksArray[i].check === false){
-        image = unchecked
-      textUpdate = ''
-      } else {
-        image = checked
-        textUpdate = checkedText
-      }
+    toDoObjTasksArray[i].check ? (image = checked, textUpdate = checkedText): (image = unchecked, textUpdate = '')
+
     createdHtmlArray.push(`<div class="todo-card-item__div" data-id="${toDoObjTasksArray[i].id}">
         <input type="image" class="todo-card-item__div__img image" src="${image}" alt="unchecked todo checkbox">
           <p class="todo-card-item__div__p" ${textUpdate}>${toDoObjTasksArray[i].item}</p>
