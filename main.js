@@ -155,11 +155,11 @@ function makeAsideItemHtml(event) {
 function appendToDoCard(toDoObj, taskItems) {
   main.insertAdjacentHTML(
     'afterbegin',
-    `<article class="todo-card" data-id="${toDoObj.id}">
+    `<article class="todo-card" ${urgentCheckColor(toDoObj)} data-id="${toDoObj.id}">
       <h3 class="todo-card__h3" >${toDoObj.title}</h3>
-      <div class="todo-card__div-sperator1"></div>
+      <div class="todo-card__div-sperator1" ${urgentCheckDiv(toDoObj)}></div>
       ${taskItems}
-      <div class="todo-card__div-sperator2"></div>
+      <div class="todo-card__div-sperator2" ${urgentCheckDiv(toDoObj)}></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
           <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `src="images/urgent-active.svg"` : `src = "images/urgent.svg"`} alt="unactive image urgent status">
@@ -319,3 +319,15 @@ function enableDeleteVerificationOnPageLoad(toDoObj) {
   })
   trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
 };
+
+function urgentCheckColor(toDoObj) {
+  var style;
+  toDoObj.urgent ? (style = `style="background-color: #ffe89d; border: 2px solid #ffc30c;"`) : (style ='')
+  return style
+}
+
+function urgentCheckDiv(toDoObj) {
+  var style;
+  toDoObj.urgent ? (style = `style = "background-color: #ffc30c;"`) : (style = '')
+  return style
+}
