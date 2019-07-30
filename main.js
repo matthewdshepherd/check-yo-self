@@ -260,10 +260,6 @@ function checkItem(event) {
 
 function makeUrgent(event) {
   var cardIndex = findIndex(event);
-  toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`)) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`))
-
-  // toDoArray[cardIndex].saveToStorage(toDoArray)
-
   toDoArray[cardIndex].updateToDo(event, cardIndex)
 }
 
