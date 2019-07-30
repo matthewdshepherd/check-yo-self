@@ -191,16 +191,19 @@ function makeTaskString(toDoObj) {
   var createdHtmlArray = [];
   var unchecked = `images/checkbox.svg`;
   var checked = `images/checkbox-active.svg`;
+  var checkedText = `style = "color: #3c6577; font-style: italic;"`
   var image;
   for (var i = 0; i < toDoObjTasksArray.length; i++) {
     if (toDoObjTasksArray[i].check === false){
         image = unchecked
+      textUpdate = ''
       } else {
         image = checked
+        textUpdate = checkedText
       }
     createdHtmlArray.push(`<div class="todo-card-item__div" data-id="${toDoObjTasksArray[i].id}">
         <input type="image" class="todo-card-item__div__img image" src="${image}" alt="unchecked todo checkbox">
-          <p class="todo-card-item__div__p">${toDoObjTasksArray[i].item}</p>
+          <p class="todo-card-item__div__p" ${textUpdate}>${toDoObjTasksArray[i].item}</p>
           </div>`)
   }
   return createdHtmlArray.join(' ')
@@ -250,17 +253,23 @@ function findIndex(event) {
 function checkItem(event) {
   var itemIndex = findItemIndex(event)
   var cardIndex = findIndex(event);
-  toDoArray[cardIndex].tasks[itemIndex].check ? (toDoArray[cardIndex].tasks[itemIndex].check = false, event.target.src = 'images/checkbox.svg') : (toDoArray[cardIndex].tasks[itemIndex].check = true, event.target.src = 'images/checkbox-active.svg')
+  toDoArray[cardIndex].tasks[itemIndex].check ? (toDoArray[cardIndex].tasks[itemIndex].check = false, event.target.src = 'images/checkbox.svg', event.target.nextElementSibling.removeAttribute('style')) : (toDoArray[cardIndex].tasks[itemIndex].check = true, event.target.src = 'images/checkbox-active.svg', event.target.nextElementSibling.setAttribute('style', 'color: #3c6577; font-style: italic;'))
   
+    event.target.classList.remove('item-checked');
+    event.target.classList.add('item-checked');
+
+
   toDoArray[cardIndex].saveToStorage(toDoArray)
   enableDeleteVerification(event)
 };
 
 function makeUrgent(event) {
   var cardIndex = findIndex(event);
-  toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`)) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`))
+  // toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`)) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`))
 
-  toDoArray[cardIndex].saveToStorage(toDoArray)
+  // toDoArray[cardIndex].saveToStorage(toDoArray)
+
+  toDoArray[cardIndex].updateToDo(event)
 }
 
 function findItemID(event) {
@@ -297,8 +306,6 @@ function getArrayOfItemIDs(toDoObjTasks) {
 };
 
 function enableDeleteVerification(event) {
-  console.log('I ran!!')
-  // debugger
   var cardIndex = findIndex(event);
   var taskArray = toDoArray[cardIndex].tasks
   var trueCounter = 0
