@@ -2,6 +2,7 @@
 var toDoArray = JSON.parse(localStorage.getItem('toDoObj')) || []
 
 // QUERY SELECTORS
+var searchBox = document.querySelector('.header__section-text');
 var aside = document.querySelector('.aside');
 var asideIdeas = document.querySelector('.form__div-idea-input');
 var asideTitleInput = document.querySelector('.form__input');
@@ -19,6 +20,7 @@ reassignClass();
 persist();
 
 // EVENT LISTENERS
+searchBox.addEventListener('keyup', searchFilter)
 aside.addEventListener('keypress', function () {
   if (event.keyCode === 13) {
       event.preventDefault();
@@ -155,11 +157,11 @@ function makeAsideItemHtml(event) {
 function appendToDoCard(toDoObj, taskItems) {
   main.insertAdjacentHTML(
     'afterbegin',
-    `<article class="todo-card" ${urgentCheckColor(toDoObj)} data-id="${toDoObj.id}">
+    `<article class="todo-card" ${urgentStyleColor(toDoObj)} data-id="${toDoObj.id}">
       <h3 class="todo-card__h3" >${toDoObj.title}</h3>
-      <div class="todo-card__div-sperator1" ${urgentCheckDiv(toDoObj)}></div>
+      <div class="todo-card__div-sperator1" ${urgentStyleDiv(toDoObj)}></div>
       ${taskItems}
-      <div class="todo-card__div-sperator2" ${urgentCheckDiv(toDoObj)}></div>
+      <div class="todo-card__div-sperator2" ${urgentStyleDiv(toDoObj)}></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
           <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `src="images/urgent-active.svg"` : `src = "images/urgent.svg"`} alt="unactive image urgent status">
@@ -249,10 +251,6 @@ function checkItem(event) {
   var itemIndex = findItemIndex(event)
   var cardIndex = findIndex(event);
   toDoArray[cardIndex].tasks[itemIndex].check ? (toDoArray[cardIndex].tasks[itemIndex].check = false, event.target.src = 'images/checkbox.svg', event.target.nextElementSibling.removeAttribute('style')) : (toDoArray[cardIndex].tasks[itemIndex].check = true, event.target.src = 'images/checkbox-active.svg', event.target.nextElementSibling.setAttribute('style', 'color: #3c6577; font-style: italic;'))
-  
-    event.target.classList.remove('item-checked');
-    event.target.classList.add('item-checked');
-
 
   toDoArray[cardIndex].saveToStorage(toDoArray)
   enableDeleteVerification(event)
@@ -320,14 +318,27 @@ function enableDeleteVerificationOnPageLoad(toDoObj) {
   trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
 };
 
-function urgentCheckColor(toDoObj) {
+function urgentStyleColor(toDoObj) {
   var style;
   toDoObj.urgent ? (style = `style="background-color: #ffe89d; border: 2px solid #ffc30c;"`) : (style ='')
   return style
 }
 
-function urgentCheckDiv(toDoObj) {
+function urgentStyleDiv(toDoObj) {
   var style;
   toDoObj.urgent ? (style = `style = "background-color: #ffc30c;"`) : (style = '')
   return style
+}
+
+function searchFilter() {
+  var search = searchBox.value.toLowerCase();
+  var results = toDoArray.filter(function (toDoObj) {
+    return (
+      (toDoObj.title.toLowerCase().includes(search) )
+    );
+  });
+  main.innerHTML = '';
+  results.forEach(function (toDoObj) {
+    appendToDoCard(toDoObj, makeTaskString(toDoObj));
+  });
 }
