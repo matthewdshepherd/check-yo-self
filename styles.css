@@ -216,6 +216,13 @@ body {
 .delete {
   margin-top: 3px;
   padding: 0;
+  color: #3c6577;
+}
+
+.item-checked {
+  color: #3c6577;
+  font-style: italic;
+
 }
 
 
