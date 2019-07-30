@@ -20,7 +20,6 @@ class ToDoList {
   updateToDo(event, cardIndex) {
     // top div
     var topDiv = event.target.parentElement.parentElement.parentElement.children[1]
-    // botom div
     var bottomDiv = event.target.parentElement.parentElement.previousElementSibling
    
     toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`), event.target.closest('.todo-card').removeAttribute('style'), topDiv.removeAttribute('style'), bottomDiv.removeAttribute('style')) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`), event.target.closest('.todo-card').setAttribute('style', 'background-color: #ffe89d; border: 2px solid #ffc30c;'), topDiv.setAttribute('style', 'background-color: #ffc30c;'), bottomDiv.setAttribute('style', 'background-color: #ffc30c;'))
