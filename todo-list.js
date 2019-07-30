@@ -17,8 +17,8 @@ class ToDoList {
     this.saveToStorage(toDoArray);
   }
   // updateToDo(should update the todo’s title and urgency)
-  updateToDo(event) {
-    var cardIndex = findIndex(event);
+  updateToDo(event, cardIndex) {
+    // var cardIndex = findIndex(event);
     toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`)) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`))
 
     toDoArray[cardIndex].saveToStorage(toDoArray)
