@@ -159,9 +159,9 @@ function appendToDoCard(toDoObj, taskItems) {
     'afterbegin',
     `<article class="todo-card" ${urgentStyleColor(toDoObj)} data-id="${toDoObj.id}">
       <h3 class="todo-card__h3" >${toDoObj.title}</h3>
-      <div class="todo-card__div-sperator1" ${urgentStyleDiv(toDoObj)}></div>
+      <div class="todo-card__div-sperator1 div-sperator" ${urgentStyleDiv(toDoObj)}></div>
       ${taskItems}
-      <div class="todo-card__div-sperator2" ${urgentStyleDiv(toDoObj)}></div>
+      <div class="todo-card__div-sperator2 div-sperator" ${urgentStyleDiv(toDoObj)}></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
           <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `src="images/urgent-active.svg"` : `src = "images/urgent.svg"`} alt="unactive image urgent status">

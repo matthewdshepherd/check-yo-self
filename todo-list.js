@@ -18,10 +18,12 @@ class ToDoList {
   }
   // updateToDo(should update the todo’s title and urgency)
   updateToDo(event, cardIndex) {
-    // var cardIndex = findIndex(event);
-    toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`), document.querySelector('.todo-card').removeAttribute('style'), document.querySelector('.todo-card__div-sperator1').removeAttribute('style'), document.querySelector('.todo-card__div-sperator2').removeAttribute('style')) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`), document.querySelector('.todo-card').setAttribute('style', 'background-color: #ffe89d; border: 2px solid #ffc30c;'),
-      document.querySelector('.todo-card__div-sperator1').setAttribute('style', 'background-color: #ffc30c;'),
-      document.querySelector('.todo-card__div-sperator2').setAttribute('style', 'background-color: #ffc30c;'))
+    // top div
+    var topDiv = event.target.parentElement.parentElement.parentElement.children[1]
+    // botom div
+    var bottomDiv = event.target.parentElement.parentElement.previousElementSibling
+   
+    toDoArray[cardIndex].urgent ? (toDoArray[cardIndex].urgent = false, (event.target.src = `images/urgent.svg`), event.target.closest('.todo-card').removeAttribute('style'), topDiv.removeAttribute('style'), bottomDiv.removeAttribute('style')) : (toDoArray[cardIndex].urgent = true, (event.target.src = `images/urgent-active.svg`), event.target.closest('.todo-card').setAttribute('style', 'background-color: #ffe89d; border: 2px solid #ffc30c;'), topDiv.setAttribute('style', 'background-color: #ffc30c;'), bottomDiv.setAttribute('style', 'background-color: #ffc30c;'))
 
     toDoArray[cardIndex].saveToStorage(toDoArray)
   }
