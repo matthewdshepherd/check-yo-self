@@ -254,25 +254,7 @@ function checkItem(event) {
   
   toDoArray[cardIndex].saveToStorage(toDoArray)
   enableDeleteVerification(event)
-  // if (event.target.src.includes('images/checkbox.svg')) {
-  //   event.target.src = 'images/checkbox-active.svg';
-  //   toggleCheck(event)
-  // } else {
-  //   event.target.src = 'images/checkbox.svg';
-  //   toggleCheck(event)
-  // }
 };
-
-// function toggleCheck(event) {
-//   var itemIndex = findItemIndex(event)
-//   var cardIndex = findIndex(event);
-//   if (toDoArray[cardIndex].tasks[itemIndex].check === false) {
-//     toDoArray[cardIndex].tasks[itemIndex].check = true
-//   } else {
-//     toDoArray[cardIndex].tasks[itemIndex].check = false
-//   }
-//   toDoArray[cardIndex].saveToStorage(toDoArray)
-// };
 
 function makeUrgent(event) {
   var cardIndex = findIndex(event);
@@ -325,12 +307,8 @@ function enableDeleteVerification(event) {
       trueCounter += 1
     }
   })
-  if (trueCounter === taskArray.length) {
-    console.log('I should be able to delete!!')
-    document.querySelector('.delete-image').disabled = false;
-  } else {
-    document.querySelector('.delete-image').disabled = true;
-  }
+
+  trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
 };
 
 function enableDeleteVerificationOnPageLoad(toDoObj) {
@@ -341,7 +319,5 @@ function enableDeleteVerificationOnPageLoad(toDoObj) {
       trueCounter += 1
     }
   })
-  if (trueCounter === taskArray.length) {
-    document.querySelector('.delete-image').disabled = false;
-  }
+  trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
 };
