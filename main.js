@@ -69,7 +69,7 @@ main.addEventListener('click', function () {
   }
   if (event.target.closest('.todo-card-item__div__img')) {
     checkItem(event);
-    enableDeleteVerification(event);
+    // enableDeleteVerification(event);
   }
   if (event.target.closest('.urgent-image')) {
     makeUrgent(event);
@@ -303,8 +303,9 @@ function enableDeleteVerification(event) {
       trueCounter += 1
     }
   })
-
-  trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
+  var deleteElementIndex = event.target.parentElement.parentElement.children.length -1
+  var deleteElementSrc = event.target.parentElement.parentElement.children[deleteElementIndex].children[1].children[0]
+  trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false, deleteElementSrc.src = 'images/delete-active.svg') : (document.querySelector('.delete-image').disabled = true, deleteElementSrc.src = 'images/delete.svg')
 };
 
 function enableDeleteVerificationOnPageLoad(toDoObj) {
