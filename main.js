@@ -153,7 +153,6 @@ function makeAsideItemHtml(event) {
 };
 
 function appendToDoCard(toDoObj, taskItems) {
-  console.log('toDoObj.urgent: ', toDoObj.urgent)
   main.insertAdjacentHTML(
     'afterbegin',
     `<article class="todo-card" data-id="${toDoObj.id}">
@@ -186,7 +185,7 @@ function persist() {
     enableDeleteVerificationOnPageLoad(toDoObj);
   })
 };
-// need to update this function to change image when clicked(toDoObj.check === (false/true))
+
 function makeTaskString(toDoObj) {
   var toDoObjTasksArray = toDoObj.tasks;
   var createdHtmlArray = [];
@@ -225,7 +224,6 @@ function disableButtons (button) {
 };
 
 function deleteCard(event) {
-  // enableDeleteVerification(event)
   var cardIndex = findIndex(event);
   if (event.target.closest('.delete-image')) {
     event.target.closest('.todo-card').remove();
@@ -250,13 +248,12 @@ function findIndex(event) {
 };
 
 function checkItem(event) {
-  if (event.target.src.includes('images/checkbox.svg')) {
-    event.target.src = 'images/checkbox-active.svg';
-    toggleCheck(event)
-  } else {
-    event.target.src = 'images/checkbox.svg';
-    toggleCheck(event)
-  }
+  var itemIndex = findItemIndex(event)
+  var cardIndex = findIndex(event);
+  toDoArray[cardIndex].tasks[itemIndex].check ? (toDoArray[cardIndex].tasks[itemIndex].check = false, event.target.src = 'images/checkbox.svg') : (toDoArray[cardIndex].tasks[itemIndex].check = true, event.target.src = 'images/checkbox-active.svg')
+  
+  toDoArray[cardIndex].saveToStorage(toDoArray)
+  enableDeleteVerification(event)
 };
 
 function makeUrgent(event) {
@@ -297,23 +294,11 @@ function getArrayOfItemIDs(toDoObjTasks) {
     arrayOfItemIDs.push(parseInt(toDoObjTasks[i].id))
   }
   return arrayOfItemIDs
-   
-};
-
-
-
-function toggleCheck(event) {
-  var itemIndex = findItemIndex(event)
-  var cardIndex = findIndex(event);
-  if (toDoArray[cardIndex].tasks[itemIndex].check === false) {
-    toDoArray[cardIndex].tasks[itemIndex].check = true
-  } else {
-    toDoArray[cardIndex].tasks[itemIndex].check = false
-  }
-  toDoArray[cardIndex].saveToStorage(toDoArray)
 };
 
 function enableDeleteVerification(event) {
+  console.log('I ran!!')
+  // debugger
   var cardIndex = findIndex(event);
   var taskArray = toDoArray[cardIndex].tasks
   var trueCounter = 0
@@ -322,10 +307,9 @@ function enableDeleteVerification(event) {
       trueCounter += 1
     }
   })
-  if (trueCounter === taskArray.length) {
-    document.querySelector('.delete-image').disabled = false;
-  }
-}
+
+  trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
+};
 
 function enableDeleteVerificationOnPageLoad(toDoObj) {
   var taskArray = toDoObj.tasks;
@@ -335,7 +319,5 @@ function enableDeleteVerificationOnPageLoad(toDoObj) {
       trueCounter += 1
     }
   })
-  if (trueCounter === taskArray.length) {
-    document.querySelector('.delete-image').disabled = false;
-  }
-}
+  trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
+};
