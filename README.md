@@ -26,14 +26,14 @@
 
   <img src="images/check-yo-self-desktop1.png" alt="Check Yoself Desktop">
   <img src="images/check-yo-self-desktop2.png" alt="Check Yoself Desktop">
-  <img src="images/check-yo-self-mobile -iPhone 5_SE.png" alt="Check Yoself Mobile">
+  <img src="images/check-yo-self-mobile-iPhone-5_SE.png" alt="Check Yoself Mobile">
 
 ## Features
 
 - [x] Altering page content via input fields (JS)
 - [x] Responsive (CSS Media Query with 1 break points)
 - [x] Logic to search through and show mathcing titles, tasks & urgent
-- [x] LocalStorage to persist data
+- [x] localStorage to persist data
 - [x] Maniuplate date model and dom data
 
 ## Try It Out
