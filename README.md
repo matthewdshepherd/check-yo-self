@@ -48,7 +48,9 @@
 
 5. Each card has the ability to be marked as urgent with visiable changes to the card.
 
-6. Mobile and desktop layout, so while you're staying up late at night you can be createing To-Do Lists on your phone.
+6. Search through your list titles and/or by urgent cards!
+
+7. Mobile and desktop layout, so while you're staying up late at night you can be createing To-Do Lists on your phone.
 
 ## Take It For A Spin
 
