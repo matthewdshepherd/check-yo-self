@@ -89,9 +89,9 @@ function newToDo(event) {
   promptIdea();
 };
 
-function remakeNewIdea(id, title, urgent, tasks) {
+function remakeNewIdea(id, title, urgent, tasks, tasksString) {
   var tempTasks = tasks
-  var toDoObj = new ToDoList(id, title, urgent, tasks);
+  var toDoObj = new ToDoList(id, title, urgent, tasks, tasksString);
   toDoObj.tasks = tempTasks;
   return toDoObj
 };
@@ -99,7 +99,7 @@ function remakeNewIdea(id, title, urgent, tasks) {
 function reassignClass() {
   var tempArray = []
   toDoArray.forEach(function (toDoObj) {
-    tempArray.push(remakeNewIdea(toDoObj.id, toDoObj.title, toDoObj.urgent, toDoObj.tasks));
+    tempArray.push(remakeNewIdea(toDoObj.id, toDoObj.title, toDoObj.urgent, toDoObj.tasks, toDoObj.tasksString));
   });
   toDoArray = tempArray;
 };
@@ -116,6 +116,7 @@ function pushItemsIntoToDoObj(event, toDoObj) {
   for (var i = 0; i < arrayOfItems.length; i++) {
     toDoObj.tasks.push({ check: false, item: arrayOfItems[i], id: arrayOfItemID[i]})
   }
+  toDoObj.tasksString = arrayOfItems.join(' ').toLowerCase();
 };
 
 function getItemsFromAside(event) {
@@ -277,8 +278,8 @@ function checkFilterBtn() {
       filter.disabled = true;
     }
 };
-
-var buttonClicked = 0
+var urgentSearch = 0;
+var buttonClicked = 0;
 function urgencyFilterBtn(event) {
   buttonClicked ? (buttonClicked = 0, event.target.removeAttribute('style'), urgentSearch = 0, searchFilter()) : (buttonClicked = 1, event.target.setAttribute('style', 'background-color: #ef4a23; border: 2px solid #782616;'), urgentSearch = true, searchFilter())
 }
@@ -369,7 +370,8 @@ function searchFilter() {
   var search = searchBox.value.toLowerCase();
   var results = toDoArray.filter(function (toDoObj) {
     return (
-      (toDoObj.title.toLowerCase().includes(search) && (toDoObj.urgent === urgentSearch || urgentSearch === 0))
+      ((toDoObj.title.toLowerCase().includes(search) ||
+        toDoObj.tasksString.includes(search)) && (toDoObj.urgent === urgentSearch || urgentSearch === 0))
     );
   });
   main.innerHTML = '';
