@@ -318,8 +318,6 @@ html:not([data-scroll='0']) {
   margin-bottom: 10px;
 }
 
-}
-
 button {
   cursor:pointer;
 }
