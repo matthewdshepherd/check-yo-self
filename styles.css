@@ -150,7 +150,6 @@
 }
  .todo-card:hover {
      box-shadow: 0 4px 8px 0 #587a75, 0 6px 20px 1px #587a75;
-    /* transform: scale(1.2) */
 }
  .todo-card__h3 {
      font-weight: 800;
