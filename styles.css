@@ -18,6 +18,22 @@ body {
     height: 100%;
     width: 100vw;
 }
+
+html:not([data-scroll='0']) {
+    
+    /* body {
+      padding-top: 3em;
+    } */
+    
+    header {
+        position: fixed;
+        top: 0;
+        /* background-color: #fff; */
+        box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+    }
+    
+}
+
 /* *********** HEADER *********** */
 .header {
   background-color: #1f1f3d;
@@ -66,7 +82,7 @@ body {
   justify-content: center;
   grid-area: aside;
   min-width: 275px;
-  height: 100vh;
+  /* height: 100vh; */
 } 
 
 .form {
@@ -116,9 +132,14 @@ body {
 .form__section-img {
   background-color: #1f1f3d;
   border-radius: 0 3px 3px 0;
+  border-right: none;
   height: 45px;
   padding: 10px;
   width: 15%;
+}
+
+.form__section-img:disabled {
+  background-color: #8F8F9E
 }
 
 .form__button {
@@ -146,7 +167,17 @@ body {
   padding: 1rem;;
   min-height: 100vh;
   column-width: 17em; /* this is part of the settings for masanory */ 
+}
 
+.prompt-idea {
+  position: absolute;
+  z-index: 1;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.hidden {
+    display: none;
 }
 
 .todo-card {
@@ -154,8 +185,7 @@ body {
   border: 2px solid #c7d3d8;
   font-weight: 400;
   color: #1f1f3d;
-  /* margin: 15px 15px 20px 15px; */
-  /* max-width: 325px; */
+ 
   min-width: 275px;
   display: inline-block;
   margin:  0.5rem  1rem  0.5rem 0;
@@ -225,6 +255,11 @@ body {
 
 }
 
+.header__section-text,
+.form__input {
+  cursor: text;
+}
+
 
 @media screen and (max-width: 600px) {
   body {
@@ -285,8 +320,13 @@ body {
 
 }
 
+button {
+  cursor:pointer;
+}
+
 button:disabled {
-  background-color: #8F8F9E
+  background-color: #8F8F9E;
+  cursor: default;
 }
 
 input {
