@@ -316,7 +316,6 @@ input {
     border: none;
     padding-left: 15px;
     outline: none;
-    user-select: none;
   }
 
   input[type="text"]:focus {
