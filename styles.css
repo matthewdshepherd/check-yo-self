@@ -18,6 +18,22 @@ body {
     height: 100%;
     width: 100vw;
 }
+
+html:not([data-scroll='0']) {
+    
+    /* body {
+      padding-top: 3em;
+    } */
+    
+    header {
+        position: fixed;
+        top: 0;
+        /* background-color: #fff; */
+        box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+    }
+    
+}
+
 /* *********** HEADER *********** */
 .header {
   background-color: #1f1f3d;
@@ -66,7 +82,7 @@ body {
   justify-content: center;
   grid-area: aside;
   min-width: 275px;
-  height: 100vh;
+  /* height: 100vh; */
 } 
 
 .form {
@@ -151,7 +167,6 @@ body {
   padding: 1rem;;
   min-height: 100vh;
   column-width: 17em; /* this is part of the settings for masanory */ 
-
 }
 
 .todo-card {

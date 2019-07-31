@@ -168,14 +168,14 @@ function appendToDoCard(toDoObj, taskItems) {
             <p class="todo-card-footer__container__div urgent">URGENT</p>
         </div>
         <div class="todo-card-footer__container__div">
-          <input type="image" class="todo-card-footer__container__div2__img delete-image image" src="images/delete.svg" alt="unactive delete button" disabled>
+          <input type="image" class="todo-card-footer__container__div2__img delete-image image" src = ${checkForDeleteButton(toDoObj)} alt="unactive delete button" disabled>
           <p class="todo-card-footer__container__div delete" >DELETE</p>
         </div>
       </container>
     </article>`
   )
 };
-
+// src = "images/delete.svg"?
 function clearInput(input) {
   input.value = '';
 };
@@ -318,6 +318,19 @@ function enableDeleteVerificationOnPageLoad(toDoObj) {
   })
   trueCounter === taskArray.length ? (document.querySelector('.delete-image').disabled = false) : (document.querySelector('.delete-image').disabled = true)
 };
+
+function checkForDeleteButton(toDoObj) {
+  var taskArray = toDoObj.tasks;
+  var trueCounter = 0
+  var img;
+  taskArray.forEach(function (item) {
+    if (item.check === true) {
+      trueCounter += 1
+    }
+  })
+  trueCounter === taskArray.length ? (img = "images/delete-active.svg") : (img = "images/delete.svg")
+  return img
+}
 
 function urgentStyleColor(toDoObj) {
   var style;
