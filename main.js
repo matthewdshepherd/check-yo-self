@@ -20,8 +20,10 @@ var paragraph = document.querySelector('.prompt-idea')
 reassignClass();
 persist();
 promptIdea();
+checkFilterBtn();
 
 // EVENT LISTENERS
+filter.addEventListener('click', urgencyFilterBtn)
 searchBox.addEventListener('keyup', searchFilter)
 aside.addEventListener('keydown', function () {
   if (event.keyCode === 13) {
@@ -72,7 +74,6 @@ main.addEventListener('click', function () {
   }
   if (event.target.closest('.todo-card-item__div__img')) {
     checkItem(event);
-    // enableDeleteVerification(event);
   }
   if (event.target.closest('.urgent-image')) {
     makeUrgent(event);
@@ -256,13 +257,30 @@ function checkItem(event) {
   var cardIndex = findIndex(event);
   toDoArray[cardIndex].tasks[itemIndex].check ? (toDoArray[cardIndex].tasks[itemIndex].check = false, event.target.src = 'images/checkbox.svg', event.target.nextElementSibling.removeAttribute('style')) : (toDoArray[cardIndex].tasks[itemIndex].check = true, event.target.src = 'images/checkbox-active.svg', event.target.nextElementSibling.setAttribute('style', 'color: #3c6577; font-style: italic;'))
 
-  toDoArray[cardIndex].saveToStorage(toDoArray)
-  enableDeleteVerification(event)
+  toDoArray[cardIndex].saveToStorage(toDoArray);
+  enableDeleteVerification(event);
 };
 
 function makeUrgent(event) {
   var cardIndex = findIndex(event);
-  toDoArray[cardIndex].updateToDo(event, cardIndex)
+  toDoArray[cardIndex].updateToDo(event, cardIndex);
+  checkFilterBtn();
+};
+
+function checkFilterBtn() {
+  var urgentCounts = toDoArray.filter(function(toDoObj) {
+    return toDoObj.urgent === true
+  })
+    if (urgentCounts.length > 0) {
+      filter.disabled = false;
+    } else {
+      filter.disabled = true;
+    }
+};
+
+var buttonClicked = 0
+function urgencyFilterBtn(event) {
+  buttonClicked ? (buttonClicked = 0, event.target.removeAttribute('style'), urgentSearch = 0, searchFilter()) : (buttonClicked = 1, event.target.setAttribute('style', 'background-color: #ef4a23; border: 2px solid #782616;'), urgentSearch = true, searchFilter())
 }
 
 function findItemID(event) {
@@ -351,7 +369,7 @@ function searchFilter() {
   var search = searchBox.value.toLowerCase();
   var results = toDoArray.filter(function (toDoObj) {
     return (
-      (toDoObj.title.toLowerCase().includes(search) )
+      (toDoObj.title.toLowerCase().includes(search) && (toDoObj.urgent === urgentSearch || urgentSearch === 0))
     );
   });
   main.innerHTML = '';
