@@ -26,13 +26,13 @@
 
   <img src="images/check-yo-self-desktop1.png" alt="Check Yoself Desktop">
   <img src="images/check-yo-self-desktop2.png" alt="Check Yoself Desktop">
-  <img src="images/check-yo-self-mobile -iPhone 5_SE.png" alt="Check Yoself Mobile">
+  <img src="images/check-yo-self-mobile-iPhone-5_SE.png" alt="Check Yoself Mobile">
 
 ## Features
 
 - [x] Altering page content via input fields (JS)
 - [x] Responsive (CSS Media Query with 1 break points)
-- [x] Logic to search through and show mathcing titles
+- [x] Logic to search through and show mathcing titles, tasks & urgent
 - [x] localStorage to persist data
 - [x] Maniuplate date model and dom data
 
@@ -48,7 +48,7 @@
 
 5. Each card has the ability to be marked as urgent with visiable changes to the card.
 
-6. Search through your list titles and/or by urgent cards!
+6. Search through your list titles, tasks and by urgent cards!
 
 7. Mobile and desktop layout, so while you're staying up late at night you can be createing To-Do Lists on your phone.
 
