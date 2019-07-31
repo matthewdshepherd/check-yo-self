@@ -150,7 +150,7 @@ body {
   height: 100%;
   padding: 1rem;;
   min-height: 100vh;
-  column-width: 17em; /* this is part of the settings for masanory */ 
+  column-width: 17em; 
 }
 
 .prompt-idea {
