@@ -15,6 +15,7 @@ class ToDoList {
   deleteFromStorage(cardIndex) {
     toDoArray.splice(cardIndex, 1);
     this.saveToStorage(toDoArray);
+    promptIdea()
   }
   // updateToDo(should update the todo’s title and urgency)
   updateToDo(event, cardIndex) {

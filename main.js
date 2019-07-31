@@ -14,19 +14,23 @@ var clear = document.querySelector(".clear")
 var filter = document.querySelector(".filter")
 var taskInput = document.querySelector('.form__section-input')
 var main = document.querySelector('.main')
+var paragraph = document.querySelector('.prompt-idea')
 
 // Functions on page load
 reassignClass();
 persist();
+promptIdea();
 
 // EVENT LISTENERS
 searchBox.addEventListener('keyup', searchFilter)
-aside.addEventListener('keypress', function () {
+aside.addEventListener('keydown', function () {
   if (event.keyCode === 13) {
       event.preventDefault();
       addTask.click();
     }
-    enableasideButtons()
+    enableMakeTaskListBtn();
+    enableClearAllBtn();
+    enableAddTaskImage();
   });
 
 aside.addEventListener('click', function () {
@@ -34,13 +38,16 @@ aside.addEventListener('click', function () {
   if (event.target.closest('.form__section-img')) {
     addItemsToAside(taskInput);
     clearInput(taskInput);
-    enableasideButtons();
+    enableMakeTaskListBtn();
+    enableClearAllBtn();
+    enableAddTaskImage();
     disableButtons(addTask);
   };
 
   if (event.target.closest('.make')) {
     clearInput(taskInput);
     newToDo(event);
+    promptIdea()
     disableButtons(make);
     disableButtons(clear);
     disableButtons(addTask);
@@ -82,6 +89,7 @@ function newToDo(event) {
   pushItemsIntoToDoObj(event, toDoObj);
   createTaskCard(event, toDoObj)
   toDoObj.saveToStorage(toDoArray);
+  promptIdea();
 };
 
 function remakeNewIdea(id, title, urgent, tasks) {
@@ -206,18 +214,30 @@ function makeTaskString(toDoObj) {
   return createdHtmlArray.join(' ')
 };
 
-function enableasideButtons() {
-  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
-    clear.disabled = false;
-  }
+function enableMakeTaskListBtn() {
   var tasksArray = document.querySelectorAll('.container1')
   if (asideTitleInput.value !== '' && tasksArray.length > 0) {
     make.disabled = false;
+  } else {
+    make.disabled = true;
   }
+}
+
+function enableClearAllBtn() {
+  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
+    clear.disabled = false;
+  } else {
+    clear.disabled = true;
+  }
+}
+
+function enableAddTaskImage(params) {
   if (taskInput.value !== '') {
     addTask.disabled = false;
+  } else {
+    addTask.disabled = true
   }
-};
+}
 
 function disableButtons (button) {
   button.disabled = true;
@@ -275,7 +295,6 @@ function findItemIndex(event) {
       return parseInt(i);
     }
   }
-
 };
 
 function getToDoObjItemsArray(event) {
@@ -355,4 +374,12 @@ function searchFilter() {
   results.forEach(function (toDoObj) {
     appendToDoCard(toDoObj, makeTaskString(toDoObj));
   });
+}
+
+function promptIdea() {
+  if (toDoArray.length === 0) {
+    paragraph.classList.remove('hidden');
+  } else if (toDoArray.length !== 0) {
+    paragraph.classList.add('hidden');
+  }
 }

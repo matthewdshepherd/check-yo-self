@@ -169,6 +169,17 @@ html:not([data-scroll='0']) {
   column-width: 17em; /* this is part of the settings for masanory */ 
 }
 
+.prompt-idea {
+  position: absolute;
+  z-index: 1;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.hidden {
+    display: none;
+}
+
 .todo-card {
   background-color: #fafdfa;
   border: 2px solid #c7d3d8;
