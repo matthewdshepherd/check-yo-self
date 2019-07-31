@@ -1,41 +1,45 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <link rel="stylesheet" href="normalize.css" />
-      <link rel="stylesheet" href="styles.css" />
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta charset="UTF-8">
-    </head>
-    <body>
-      <header class="header"> 
-        <h1 class="header__h1">CHECK <span class="header__h1-span">YO'</span> SELF</h1>
-        <section class="header__section">
-          <img class="header__section-img image" type="image" src="images/search.svg">
-          <input class="header__section-text" type="text" placeholder="Search"/>
-        </section>
-      </header>
-      <aside class="aside">
-        <form class="form" >
-          <h2 class="form__h2" >Task Title</h2>
-          <input class="form__input" type="text" placeholder="Enter A ToDo"/>
-          <div class="form__div-idea-input">
-          </div>
-          <h2 class="form__h2">Task Item</h2>
-          <section class="form__section section2">
-            <input class="form__section-input" type="text" placeholder="Enter An Item">
-            <input type="image" class="form__section-img image" src="images/plus.svg" alt="add task item button" disabled>
-          </section>
-          <button class="form__button make" disabled>Make Task List</button>
-          <button class="form__button clear" disabled>Clear All</button>
-          <div class="form__div-line" ></div>
-          <button class="form__button filter" disabled>Filter By Urgency</button>
-        </form>
-      </aside>
-      <main class="main">
-        <p class="prompt-idea"> 🧠 MAKE SOME IDEAS 🤯 </p>
-      </main>
-    </body>
-    <script src="todo-list.js"></script>
-    <script src="main.js"></script>
-  </html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="normalize.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__h1">CHECK <span class="header__h1-span">YO'</span> SELF</h1>
+    <section class="header__section">
+      <img class="header__section-img image" type="image" src="images/search.svg">
+      <input class="header__section-text" type="text" placeholder="Search" />
+    </section>
+  </header>
+  <aside class="aside">
+    <form class="form">
+      <h2 class="form__h2">Task Title</h2>
+      <input class="form__input" type="text" placeholder="Enter A ToDo" />
+      <div class="form__div-idea-input">
+      </div>
+      <h2 class="form__h2">Task Item</h2>
+      <section class="form__section section2">
+        <input class="task-input form__section-input" type="text" placeholder="Enter An Item">
+        <!-- <input class="form__section-input task-input" type="text" placeholder="Enter An Item"> -->
+        <input type="image" class="form__section-img image" src="images/plus.svg" alt="add task item button" disabled>
+      </section>
+      <button class="form__button make" disabled>Make Task List</button>
+      <button class="form__button clear" disabled>Clear All</button>
+      <div class="form__div-line"></div>
+      <button class="form__button filter" disabled>Filter By Urgency</button>
+    </form>
+  </aside>
+  <main class="main">
+    <p class="prompt-idea"> 🧠 MAKE SOME IDEAS 🤯 </p>
+  </main>
+</body>
+<script src="todo-list.js"></script>
+<script src="main.js"></script>
+
+</html>

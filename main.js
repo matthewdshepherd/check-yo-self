@@ -12,7 +12,7 @@ var addTask = document.querySelector(".form__section-img")
 var make = document.querySelector(".make")
 var clear = document.querySelector(".clear")
 var filter = document.querySelector(".filter")
-var taskInput = document.querySelector('.form__section-input')
+var taskInput = document.querySelector('.task-input')
 var main = document.querySelector('.main')
 var paragraph = document.querySelector('.prompt-idea')
 
@@ -27,11 +27,12 @@ filter.addEventListener('click', urgencyFilterBtn)
 searchBox.addEventListener('keyup', searchFilter)
 aside.addEventListener('keydown', function () {
   if (event.keyCode === 13) {
-      event.preventDefault();
-      addTask.click();
-    }
-    enableasideButtons()
-  });
+    console.log('this is wokring')
+    event.preventDefault();
+    addTask.click();
+  }
+})
+aside.addEventListener('keyup', enableasideButtons);
 
 aside.addEventListener('click', function () {
   event.preventDefault();
@@ -66,11 +67,15 @@ aside.addEventListener('click', function () {
       disableButtons(make)
     }
   };
+
+  if (event.target.closest('.task-input') || event.target.closest('.form__input')) {
+    enableasideButtons()
+  }
 })
 
 main.addEventListener('click', function () {
   if (event.target.closest('.delete-image')) {
-   deleteCard(event);
+    deleteCard(event);
   }
   if (event.target.closest('.todo-card-item__div__img')) {
     checkItem(event);
@@ -114,7 +119,7 @@ function pushItemsIntoToDoObj(event, toDoObj) {
   var arrayOfItems = getItemsFromAside(event);
   var arrayOfItemID = getIDfromAside(event);
   for (var i = 0; i < arrayOfItems.length; i++) {
-    toDoObj.tasks.push({ check: false, item: arrayOfItems[i], id: arrayOfItemID[i]})
+    toDoObj.tasks.push({ check: false, item: arrayOfItems[i], id: arrayOfItemID[i] })
   }
   toDoObj.tasksString = arrayOfItems.join(' ').toLowerCase();
 };
@@ -144,7 +149,7 @@ function addItemsToAside() {
     <input type="image" class="form__container-img image" src="images/delete.svg" alt="delete task item button">
     <p class="form__container-p" >${taskInput.value}</p>
     </container>`
-    );
+  );
 };
 
 function makeAsideItemHtml(event) {
@@ -202,7 +207,7 @@ function makeTaskString(toDoObj) {
   var checkedText = `style = "color: #3c6577; font-style: italic;"`
   var image;
   for (var i = 0; i < toDoObjTasksArray.length; i++) {
-    toDoObjTasksArray[i].check ? (image = checked, textUpdate = checkedText): (image = unchecked, textUpdate = '')
+    toDoObjTasksArray[i].check ? (image = checked, textUpdate = checkedText) : (image = unchecked, textUpdate = '')
 
     createdHtmlArray.push(`<div class="todo-card-item__div" data-id="${toDoObjTasksArray[i].id}">
         <input type="image" class="todo-card-item__div__img image" src="${image}" alt="unchecked todo checkbox">
@@ -212,20 +217,30 @@ function makeTaskString(toDoObj) {
   return createdHtmlArray.join(' ')
 };
 
-function enableasideButtons() {
-  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
-    clear.disabled = false;
+function enableasideButtons(event) {
+  if (taskInput.value !== '') {
+    enableButton(addTask)
+  } else {
+    disableButtons(addTask)
   }
   var tasksArray = document.querySelectorAll('.container1')
-  if (asideTitleInput.value !== '' && tasksArray.length > 0) {
-    make.disabled = false;
+  if (asideTitleInput.value !== '' || taskInput.value !== '' || tasksArray.length > 0) {
+    enableButton(clear);
+  } else {
+    disableButtons(clear)
   }
-  if (taskInput.value !== '') {
-    addTask.disabled = false;
+  if (asideTitleInput.value !== '' && tasksArray.length > 0) {
+    enableButton(make)
+  } else {
+    disableButtons(make)
   }
 };
 
-function disableButtons (button) {
+function enableButton(button) {
+  button.disabled = false;
+}
+
+function disableButtons(button) {
   button.disabled = true;
 };
 
@@ -269,14 +284,14 @@ function makeUrgent(event) {
 };
 
 function checkFilterBtn() {
-  var urgentCounts = toDoArray.filter(function(toDoObj) {
+  var urgentCounts = toDoArray.filter(function (toDoObj) {
     return toDoObj.urgent === true
   })
-    if (urgentCounts.length > 0) {
-      filter.disabled = false;
-    } else {
-      filter.disabled = true;
-    }
+  if (urgentCounts.length > 0) {
+    filter.disabled = false;
+  } else {
+    filter.disabled = true;
+  }
 };
 var urgentSearch = 0;
 var buttonClicked = 0;
@@ -325,7 +340,7 @@ function enableDeleteVerification(event) {
       trueCounter += 1
     }
   })
-  var deleteElementIndex = event.target.parentElement.parentElement.children.length -1
+  var deleteElementIndex = event.target.parentElement.parentElement.children.length - 1
   var deleteElementSrc = event.target.parentElement.parentElement.children[deleteElementIndex].children[1].children[0]
   trueCounter === taskArray.length ? (deleteElementSrc.disabled = false, deleteElementSrc.src = 'images/delete-active.svg') : (deleteElementSrc.disabled = true, deleteElementSrc.src = 'images/delete.svg')
 };
@@ -356,7 +371,7 @@ function checkForDeleteButton(toDoObj) {
 
 function urgentStyleColor(toDoObj) {
   var style;
-  toDoObj.urgent ? (style = `style="background-color: #ffe89d; border: 2px solid #ffc30c;"`) : (style ='')
+  toDoObj.urgent ? (style = `style="background-color: #ffe89d; border: 2px solid #ffc30c;"`) : (style = '')
   return style
 }
 
