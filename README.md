@@ -17,15 +17,16 @@
 
 ## Screenshots
 ### Prompts:
-  <img src="images/prompt1.jpg" alt="Number Guesser Desktop">
-  <img src="images/prompt2.jpg" alt="Number Guesser Desktop with Error Message">
-  <img src="images/prompt3.jpg" alt="Number Guesser Mobile">
+  <img src="images/check-yo-self-static-comp-desktop1.jpg" alt="Check Yoself Desktop">
+  <img src="images/check-yo-self-static-comp-desktop2.jpg" alt="Check Yoself Desktop with Error Message">
+  <img src="images/check-yo-self-static-comp-desktop3.jpg" alt="Check Yoself Desktop">
+  <img src="images/check-yo-self-static-comp-mobile1.jpg" alt="Check Yoself Mobile">
   
 ### Actual:
 
-  <img src="images/Number_Guesser_Desktop.png" alt="">
-  <img src="images/Number_Guesser_Mobile.png" alt="">
-  <img src="images/Number_Guesser_Errors.png" alt="">
+  <img src="images/check-yo-self-desktop1.png" alt="Check Yoself Desktop">
+  <img src="images/check-yo-self-desktop2.png" alt="Check Yoself Desktop">
+  <img src="images/check-yo-self-mobile -iPhone 5_SE.png" alt="Check Yoself Mobile">
 
 ## Features
 
