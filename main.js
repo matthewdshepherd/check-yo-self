@@ -26,12 +26,12 @@ checkFilterBtn();
 filter.addEventListener('click', urgencyFilterBtn)
 searchBox.addEventListener('keyup', searchFilter)
 aside.addEventListener('keyup', enableasideButtons)
-  // if (event.keyCode === 13) {
-  //     event.preventDefault();
-  //     addTask.click();
-  //   }
-  //   enableasideButtons()
-  // });
+// if (event.keyCode === 13) {
+//     event.preventDefault();
+//     addTask.click();
+//   }
+//   enableasideButtons()
+// });
 
 aside.addEventListener('click', function () {
   event.preventDefault();
@@ -74,7 +74,7 @@ aside.addEventListener('click', function () {
 
 main.addEventListener('click', function () {
   if (event.target.closest('.delete-image')) {
-   deleteCard(event);
+    deleteCard(event);
   }
   if (event.target.closest('.todo-card-item__div__img')) {
     checkItem(event);
@@ -118,7 +118,11 @@ function pushItemsIntoToDoObj(event, toDoObj) {
   var arrayOfItems = getItemsFromAside(event);
   var arrayOfItemID = getIDfromAside(event);
   for (var i = 0; i < arrayOfItems.length; i++) {
-    toDoObj.tasks.push({ check: false, item: arrayOfItems[i], id: arrayOfItemID[i]})
+    toDoObj.tasks.push({
+      check: false,
+      item: arrayOfItems[i],
+      id: arrayOfItemID[i]
+    })
   }
   toDoObj.tasksString = arrayOfItems.join(' ').toLowerCase();
 };
@@ -148,7 +152,7 @@ function addItemsToAside() {
     <input type="image" class="form__container-img image" src="images/delete.svg" alt="delete task item button">
     <p class="form__container-p" >${taskInput.value}</p>
     </container>`
-    );
+  );
 };
 
 function makeAsideItemHtml(event) {
@@ -174,7 +178,11 @@ function appendToDoCard(toDoObj, taskItems) {
       <div class="todo-card__div-sperator2 div-sperator" ${urgentStyleDiv(toDoObj)}></div>
       <container class="todo-card-footer__container">
         <div class="todo-card-footer__container__div">
-          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `src="images/urgent-active.svg"` : `src = "images/urgent.svg"`} alt="unactive image urgent status">
+          <input type="image" class="todo-card-footer__container__div1__img urgent-image image" ${toDoObj.urgent ? `
+        src = "images/urgent-active.svg"
+        ` : `
+        src = "images/urgent.svg"
+        `} alt="unactive image urgent status">
             <p class="todo-card-footer__container__div urgent">URGENT</p>
         </div>
         <div class="todo-card-footer__container__div">
@@ -206,7 +214,7 @@ function makeTaskString(toDoObj) {
   var checkedText = `style = "color: #3c6577; font-style: italic;"`
   var image;
   for (var i = 0; i < toDoObjTasksArray.length; i++) {
-    toDoObjTasksArray[i].check ? (image = checked, textUpdate = checkedText): (image = unchecked, textUpdate = '')
+    toDoObjTasksArray[i].check ? (image = checked, textUpdate = checkedText) : (image = unchecked, textUpdate = '')
 
     createdHtmlArray.push(`<div class="todo-card-item__div" data-id="${toDoObjTasksArray[i].id}">
         <input type="image" class="todo-card-item__div__img image" src="${image}" alt="unchecked todo checkbox">
@@ -239,7 +247,7 @@ function enableButton(button) {
   button.disabled = false;
 }
 
-function disableButtons (button) {
+function disableButtons(button) {
   button.disabled = true;
 };
 
@@ -283,17 +291,18 @@ function makeUrgent(event) {
 };
 
 function checkFilterBtn() {
-  var urgentCounts = toDoArray.filter(function(toDoObj) {
+  var urgentCounts = toDoArray.filter(function (toDoObj) {
     return toDoObj.urgent === true
   })
-    if (urgentCounts.length > 0) {
-      filter.disabled = false;
-    } else {
-      filter.disabled = true;
-    }
+  if (urgentCounts.length > 0) {
+    filter.disabled = false;
+  } else {
+    filter.disabled = true;
+  }
 };
 var urgentSearch = 0;
 var buttonClicked = 0;
+
 function urgencyFilterBtn(event) {
   buttonClicked ? (buttonClicked = 0, event.target.removeAttribute('style'), urgentSearch = 0, searchFilter()) : (buttonClicked = 1, event.target.setAttribute('style', 'background-color: #ef4a23; border: 2px solid #782616;'), urgentSearch = true, searchFilter())
 }
@@ -339,7 +348,7 @@ function enableDeleteVerification(event) {
       trueCounter += 1
     }
   })
-  var deleteElementIndex = event.target.parentElement.parentElement.children.length -1
+  var deleteElementIndex = event.target.parentElement.parentElement.children.length - 1
   var deleteElementSrc = event.target.parentElement.parentElement.children[deleteElementIndex].children[1].children[0]
   trueCounter === taskArray.length ? (deleteElementSrc.disabled = false, deleteElementSrc.src = 'images/delete-active.svg') : (deleteElementSrc.disabled = true, deleteElementSrc.src = 'images/delete.svg')
 };
@@ -370,7 +379,7 @@ function checkForDeleteButton(toDoObj) {
 
 function urgentStyleColor(toDoObj) {
   var style;
-  toDoObj.urgent ? (style = `style="background-color: #ffe89d; border: 2px solid #ffc30c;"`) : (style ='')
+  toDoObj.urgent ? (style = `style="background-color: #ffe89d; border: 2px solid #ffc30c;"`) : (style = '')
   return style
 }
 
