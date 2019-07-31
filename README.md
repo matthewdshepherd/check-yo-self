@@ -32,8 +32,8 @@
 
 - [x] Altering page content via input fields (JS)
 - [x] Responsive (CSS Media Query with 1 break points)
-- [x] Logic to search through and show mathcing titles
-- [x] localStorage to persist data
+- [x] Logic to search through and show mathcing titles, tasks & urgent
+- [x] LocalStorage to persist data
 - [x] Maniuplate date model and dom data
 
 ## Try It Out
@@ -48,7 +48,7 @@
 
 5. Each card has the ability to be marked as urgent with visiable changes to the card.
 
-6. Search through your list titles and/or by urgent cards!
+6. Search through your list titles, tasks and by urgent cards!
 
 7. Mobile and desktop layout, so while you're staying up late at night you can be createing To-Do Lists on your phone.
 
