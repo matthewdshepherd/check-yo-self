@@ -28,9 +28,7 @@ aside.addEventListener('keydown', function () {
       event.preventDefault();
       addTask.click();
     }
-    enableMakeTaskListBtn();
-    enableClearAllBtn();
-    enableAddTaskImage();
+    enableasideButtons()
   });
 
 aside.addEventListener('click', function () {
@@ -38,9 +36,7 @@ aside.addEventListener('click', function () {
   if (event.target.closest('.form__section-img')) {
     addItemsToAside(taskInput);
     clearInput(taskInput);
-    enableMakeTaskListBtn();
-    enableClearAllBtn();
-    enableAddTaskImage();
+    enableasideButtons()
     disableButtons(addTask);
   };
 
@@ -183,7 +179,7 @@ function appendToDoCard(toDoObj, taskItems) {
     </article>`
   )
 };
-// src = "images/delete.svg"?
+
 function clearInput(input) {
   input.value = '';
 };
@@ -214,30 +210,18 @@ function makeTaskString(toDoObj) {
   return createdHtmlArray.join(' ')
 };
 
-function enableMakeTaskListBtn() {
+function enableasideButtons() {
+  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
+    clear.disabled = false;
+  }
   var tasksArray = document.querySelectorAll('.container1')
   if (asideTitleInput.value !== '' && tasksArray.length > 0) {
     make.disabled = false;
-  } else {
-    make.disabled = true;
   }
-}
-
-function enableClearAllBtn() {
-  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
-    clear.disabled = false;
-  } else {
-    clear.disabled = true;
-  }
-}
-
-function enableAddTaskImage(params) {
   if (taskInput.value !== '') {
     addTask.disabled = false;
-  } else {
-    addTask.disabled = true
   }
-}
+};
 
 function disableButtons (button) {
   button.disabled = true;
