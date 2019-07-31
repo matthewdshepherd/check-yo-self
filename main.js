@@ -12,7 +12,7 @@ var addTask = document.querySelector(".form__section-img")
 var make = document.querySelector(".make")
 var clear = document.querySelector(".clear")
 var filter = document.querySelector(".filter")
-var taskInput = document.querySelector('.form__section-input')
+var taskInput = document.querySelector('.task-input')
 var main = document.querySelector('.main')
 var paragraph = document.querySelector('.prompt-idea')
 
@@ -25,13 +25,13 @@ checkFilterBtn();
 // EVENT LISTENERS
 filter.addEventListener('click', urgencyFilterBtn)
 searchBox.addEventListener('keyup', searchFilter)
-aside.addEventListener('keydown', function () {
-  if (event.keyCode === 13) {
-      event.preventDefault();
-      addTask.click();
-    }
-    enableasideButtons()
-  });
+aside.addEventListener('keyup', enableasideButtons)
+  // if (event.keyCode === 13) {
+  //     event.preventDefault();
+  //     addTask.click();
+  //   }
+  //   enableasideButtons()
+  // });
 
 aside.addEventListener('click', function () {
   event.preventDefault();
@@ -66,6 +66,10 @@ aside.addEventListener('click', function () {
       disableButtons(make)
     }
   };
+
+  if (event.target.closest('.task-input') || event.target.closest('.form__input')) {
+    enableasideButtons()
+  }
 })
 
 main.addEventListener('click', function () {
@@ -212,18 +216,28 @@ function makeTaskString(toDoObj) {
   return createdHtmlArray.join(' ')
 };
 
-function enableasideButtons() {
-  if (asideTitleInput.value !== '' || taskInput.value !== '' || asideTasks.innerHTML !== '') {
-    clear.disabled = false;
+function enableasideButtons(event) {
+  if (taskInput.value !== '') {
+    enableButton(addTask)
+  } else {
+    disableButtons(addTask)
   }
   var tasksArray = document.querySelectorAll('.container1')
-  if (asideTitleInput.value !== '' && tasksArray.length > 0) {
-    make.disabled = false;
+  if (asideTitleInput.value !== '' || taskInput.value !== '' || tasksArray.length > 0) {
+    enableButton(clear);
+  } else {
+    disableButtons(clear)
   }
-  if (taskInput.value !== '') {
-    addTask.disabled = false;
+  if (asideTitleInput.value !== '' && tasksArray.length > 0) {
+    enableButton(make)
+  } else {
+    disableButtons(make)
   }
 };
+
+function enableButton(button) {
+  button.disabled = false;
+}
 
 function disableButtons (button) {
   button.disabled = true;
