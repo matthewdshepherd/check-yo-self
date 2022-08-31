@@ -54,7 +54,7 @@
 
 ## Take It For A Spin
 
-View <a href=https://matthewdshepherd.github.io/check-yo-self/>here</a> on GitHub.
+View <a href=https://ohnomalone.github.io/check-yo-self/>here</a> on GitHub.
 
 OR 
 
